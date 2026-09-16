@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecipeBook - Recipe Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+    <div>
+        <h1>🍳 RecipeBook</h1>
+        <p>Your personal recipe collection</p>
+    </div>
+
+    <button class="add-btn" onclick="openForm()">+ Add Recipe</button>
+</header>
+
+<main class="container">
+
+    <!-- Search & Filter -->
+    <section class="controls">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="🔍 Search recipes..."
+            oninput="renderRecipes()"
+        >
+
+        <select id="categoryFilter" onchange="renderRecipes()">
+            <option value="All">All Categories</option>
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Dinner">Dinner</option>
+            <option value="Dessert">Dessert</option>
+            <option value="Snacks">Snacks</option>
+            <option value="Drinks">Drinks</option>
+        </select>
+    </section>
+
+    <!-- Recipe Count -->
+    <div class="recipe-info">
+        <h2>My Recipes</h2>
+        <span id="recipeCount">0 recipes</span>
+    </div>
+
+    <!-- Recipe Cards -->
+    <section id="recipeList" class="recipe-grid"></section>
+
+</main>
+
+<!-- Add/Edit Recipe Modal -->
+<div id="recipeModal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h2 id="formTitle">Add Recipe</h2>
+            <button class="close-btn" onclick="closeForm()">×</button>
+        </div>
+
+        <form id="recipeForm">
+
+            <input type="hidden" id="recipeId">
+
+            <label>Recipe Name</label>
+            <input
+                type="text"
+                id="recipeName"
+                placeholder="Enter recipe name"
+                required
+            >
+
+            <label>Category</label>
+            <select id="recipeCategory" required>
+                <option value="">Select Category</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Dinner">Dinner</option>
+                <option value="Dessert">Dessert</option>
+                <option value="Snacks">Snacks</option>
+                <option value="Drinks">Drinks</option>
+            </select>
+
+            <label>Ingredients</label>
+            <textarea
+                id="recipeIngredients"
+                placeholder="Enter ingredients..."
+                required
+            ></textarea>
+
+            <label>Instructions</label>
+            <textarea
+                id="recipeInstructions"
+                placeholder="Enter cooking instructions..."
+                required
+            ></textarea>
+
+            <label>Cooking Time</label>
+            <input
+                type="text"
+                id="recipeTime"
+                placeholder="Example: 30 minutes"
+                required
+            >
+
+            <label>Recipe Image URL</label>
+            <input
+                type="url"
+                id="recipeImage"
+                placeholder="https://example.com/image.jpg"
+            >
+
+            <button type="submit" class="save-btn">
+                Save Recipe
+            </button>
+
+        </form>
+    </div>
+</div>
+
+<!-- Recipe Details Modal -->
+<div id="detailModal" class="modal">
+
+    <div class="modal-content detail-content">
+
+        <button class="close-btn" onclick="closeDetails()">×</button>
+
+        <img id="detailImage" class="detail-image" alt="Recipe">
+
+        <div class="detail-body">
+            <span id="detailCategory" class="category"></span>
+
+            <h2 id="detailName"></h2>
+
+            <p class="time">
+                ⏱️ <strong>Cooking Time:</strong>
+                <span id="detailTime"></span>
+            </p>
+
+            <h3>🥕 Ingredients</h3>
+            <p id="detailIngredients"></p>
+
+            <h3>👨‍🍳 Instructions</h3>
+            <p id="detailInstructions"></p>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    <p>🍴 RecipeBook | Built with HTML, CSS & JavaScript</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
